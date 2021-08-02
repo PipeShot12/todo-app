@@ -51,8 +51,8 @@ justify-content: center;
 align-items: center;
 position: relative;
  @media (min-width :${mediaQuery.desktop}){
-   height: 30vh;
-   width: 30vw;
+   height: 45vh;
+   width: 45vw;
  }
 
  `
