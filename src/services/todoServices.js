@@ -1,4 +1,4 @@
-const todoUrl = 'http://localhost:8080/api/v1/todos'
+const todoUrl = 'https://todo-list-app-pipe-api.herokuapp.com/api/v1/todos'
 
 const getAllTodos = async (token) => {
   const req = await window.fetch(todoUrl, {

@@ -1,5 +1,5 @@
-const loginUrl = 'http://localhost:8080/api/v1/login'
-const registerUrl = 'http://localhost:8080/api/v1/user'
+const loginUrl = 'https://todo-list-app-pipe-api.herokuapp.com/api/v1/login'
+const registerUrl = 'https://todo-list-app-pipe-api.herokuapp.com/api/v1/user'
 const loginService = async (userData) => {
   const req = await window.fetch(loginUrl, {
     method: 'POST',
