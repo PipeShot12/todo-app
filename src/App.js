@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { UserProvider } from './context/userContex'
+import LandingPage from './pages/LandingPage'
+import TodoRoutes from './components/TodoRoutes'
+import useLocalStorage from './hooks/useLocalStorage'
+function App () {
+  const { localStorageToken } = useLocalStorage('loginToken')
+  const getToken = localStorageToken
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <UserProvider>
+        <Switch>
+          <Route exact path='/' render={() => getToken?.token ? <Redirect to='/app' /> : <LandingPage />} />
+          <Route path='*'>
+            <TodoRoutes />
+          </Route>
+        </Switch>
+      </UserProvider>
+    </Router>
+  )
 }
 
-export default App;
+export default App
