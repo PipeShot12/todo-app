@@ -7,9 +7,7 @@ import Modal from '../../components/Modal/Modal'
 import styled from 'styled-components'
 import TodoList from '../../components/TodoList/TodoList'
 import todoServices from '../../services/todoServices'
-const mediaQuery = {
-  desktop: '800px'
-}
+import mediaQuery from '../../components/mediaQuery'
 const CustomButton = withStyles({
   root: {
     width: '40%',
@@ -126,6 +124,13 @@ padding: 0 20px;
 overflow: hidden;
 overflow-y: auto;
 
+@media (min-width:${mediaQuery.tabletW}) and (max-width:${mediaQuery.desktop}){
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
 @media (min-width :${mediaQuery.desktop}){
   height: 66vh;
   width: 420px;
