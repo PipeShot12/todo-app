@@ -1,6 +1,6 @@
 const mediaQuery = {
-    desktop: '960px',
-    tabletW:"500px",
+    desktop: '1000px',
+    tabletW:"400px",
 
   }
   export default mediaQuery
