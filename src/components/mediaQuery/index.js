@@ -1,5 +1,5 @@
 const mediaQuery = {
-    desktop: '900px',
+    desktop: '960px',
     tabletW:"500px",
 
   }
