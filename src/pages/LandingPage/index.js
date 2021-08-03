@@ -3,9 +3,7 @@ import { Button, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import todoLandingImage from '../../assets/todoLandingImage.svg'
-const mediaQuery = {
-  desktop: '800px'
-}
+import mediaQuery from '../../components/mediaQuery'
 const CustomButton = withStyles({
   root: {
     width: '40%',
@@ -92,7 +90,7 @@ const Title = styled.h1`
 color:var(--primary);
 /* font-size: 1.5em;
 font-weight: 400; */
-font-size: 4em;
+font-size: 3.5em;
 font-weight: 300;
 padding-top: 40px;
 `

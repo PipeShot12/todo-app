@@ -9,10 +9,8 @@ import InputText from '../../components/Inputs/InputText'
 import styled from 'styled-components'
 import userServices from '../../services/userServices'
 import Modal from '../../components/Modal/Modal'
+import mediaQuery from "../../components/mediaQuery/"
 
-const mediaQuery = {
-  desktop: '800px'
-}
 
 const CustomButton = withStyles({
   root: {
@@ -163,12 +161,31 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 
-
+@media (min-width:${mediaQuery.tabletW}) and (max-width:${mediaQuery.desktop}){
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-top: 100px;
+}
 @media (min-width :${mediaQuery.desktop}){
   height: 66vh;
   width: 420px;
 }
-
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-track{
+    background: var(--info)
+}
+::-webkit-scrollbar-thumb{
+    background: #f02b41;
+    
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #F35BB8
+}
 `
 const Title = styled.p`
 color:var(--primary);
