@@ -3,9 +3,10 @@ import './App.css'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { UserProvider } from './context/userContex'
 import LandingPage from './pages/LandingPage'
-import TodoRoutes from './components/TodoRoutes'
+import TodoRoutes from './TodoRoutes'
 import useLocalStorage from './hooks/useLocalStorage'
 function App () {
+  // Pseudo Rexdux
   const { localStorageToken } = useLocalStorage('loginToken')
   const getToken = localStorageToken
   return (

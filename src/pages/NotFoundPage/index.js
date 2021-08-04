@@ -1,35 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Button, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import pageNotFound from '../../assets/pageNotFound.svg'
-const mediaQuery = {
-  desktop: '800px'
-}
-const CustomButton = withStyles({
-  root: {
-    width: '40%',
-    height: '50px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 18,
-    fontWeight: 'initial',
-    color: 'white',
-    padding: '6px 12px',
-    lineHeight: 1.5,
-    backgroundColor: props => props.backgroundColor || 'var(--primary)',
-    '&:hover': {
-      // backgroundColor: '#F35BB8',
-      backgroundColor: props => props.hover || '#F35BB8',
-      boxShadow: 'none'
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#F35BB8',
-      borderColor: '#005cbf'
-    }
-  }
-})(Button)
+import mediaQuery from '../../components/mediaQuery'
+import CustomButton from '../../components/CustomButton'
+import { Container } from '../../commonStyles/'
 
 export default function NotFound () {
   return (
@@ -40,6 +15,7 @@ export default function NotFound () {
 
       <CustomButton
         style={{ margin: '10px 0' }}
+        width="40%"
         component={Link}
         to='/'
       >Go Home
@@ -47,16 +23,10 @@ export default function NotFound () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled.div`
-color: white;
-background-color: var(--secondary);
-height: 95vh;
-width: 95vw;
-border-radius: 5px;
+const ContainerStyle = styled(Container)`
 padding: 50px 0px;
 overflow: hidden;
 overflow-y: auto;
-
 display: flex;
 justify-content: center;
 flex-direction: column;
@@ -65,19 +35,6 @@ align-items: center;
   height: 80vh;
   width: 80vw;
 
-}
-::-webkit-scrollbar{
-    width: 8px;
-}
-::-webkit-scrollbar-track{
-    background: var(--info)
-}
-::-webkit-scrollbar-thumb{
-    background: #f02b41;
-    
-}
-::-webkit-scrollbar-thumb:hover{
-    background: #F35BB8
 }
 `
 const ContainerPhoto = styled.div`

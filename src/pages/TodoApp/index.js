@@ -1,37 +1,15 @@
-import { Button, withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import { useState, useEffect } from 'react'
 import { useUser } from '../../context/userContex'
-import AddInput from '../../components/AddInput/AddInput'
-import Modal from '../../components/Modal/Modal'
+import AddInput from '../../components/FormAddTodo/Input'
+import Modal from '../../components/Modal'
 import styled from 'styled-components'
-import TodoList from '../../components/TodoList/TodoList'
+import TodoList from '../../components/TodoList'
 import todoServices from '../../services/todoServices'
 import mediaQuery from '../../components/mediaQuery'
-const CustomButton = withStyles({
-  root: {
-    width: '40%',
-    height: '50px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 18,
-    fontWeight: 'initial',
-    color: 'white',
-    padding: '6px 12px',
-    lineHeight: 1.5,
-    backgroundColor: props => props.backgroundColor || 'var(--primary)',
-    '&:hover': {
-      // backgroundColor: '#F35BB8',
-      backgroundColor: props => props.hover || '#F35BB8',
-      boxShadow: 'none'
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#F35BB8',
-      borderColor: '#005cbf'
-    }
-  }
-})(Button)
+import CustomButton from '../../components/CustomButton'
+import { Title, Container } from '../../commonStyles'
+
 export default function Todo () {
   const { localStorageToken, saveTemporalToken, setSaveTemporalToken, setLocalStorageToken } = useUser()
   const [todos, setTodos] = useState([])
@@ -96,13 +74,26 @@ export default function Todo () {
   return (
     <ContainerStyle>
       {showModal &&
-        <Modal onClose={() => setShowModal(false)}>
-          <IconModal className='fas fa-question-circle' />
-          <TitleModal>Are You Sure {username}?</TitleModal>
-          <CustomButton onClick={deleteAllCompleted}>Yes</CustomButton>
+        <Modal 
+        onClose={() => setShowModal(false)} 
+        icon='fas fa-question-circle'
+        iconColor='#8170D6'
+        iconSize="4em"
+
+        titleColor='#8170D6'
+        titleSize='2em'
+        titleText={`Are You Sure ${username}?`}
+        >
+          <CustomButton width="40%" onClick={deleteAllCompleted}>Yes</CustomButton>
         </Modal>}
-      <Logount onClick={handleLogout}>Logout</Logount>
-      <Title>Todo List</Title>
+      <Title 
+      onClick={handleLogout}
+      size='2em'
+      textAlign='right'
+      cursor='pointer'
+      color='#8170D6'
+      >Logout</Title>
+      <Title textAlign='left' >Todo List</Title>
       <AddInput addTodo={addTodo} />
       <TodoList
         list={todos}
@@ -114,12 +105,7 @@ export default function Todo () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled.div`
-color: white;
-background-color: var(--secondary);
-height: 95vh;
-width: 95vw;
-border-radius: 5px;
+const ContainerStyle = styled(Container)`
 padding: 0 20px;
 overflow: hidden;
 overflow-y: auto;
@@ -135,41 +121,4 @@ overflow-y: auto;
   height: 66vh;
   width: 420px;
 }
-::-webkit-scrollbar{
-    width: 8px;
-}
-::-webkit-scrollbar-track{
-    background: var(--info)
-}
-::-webkit-scrollbar-thumb{
-    background: #f02b41;
-    
-}
-::-webkit-scrollbar-thumb:hover{
-    background: #F35BB8
-}
-`
-const Title = styled.h1`
-color:var(--primary);
-/* font-size: 1.5em;
-font-weight: 400; */
-font-size: 2.5em;
-font-weight: 300;
-`
-const Logount = styled.p`
-color:#8170D6;
-/* font-size: 1.5em;
-font-weight: 400; */
-font-size: 2em;
-font-weight: 300;
-text-align: right;
-cursor: pointer;
-`
-const IconModal = styled.i`
-color:#8170D6;
-font-size:4em;
-`
-const TitleModal = styled(Title)`
-color: #8170D6;
-font-size: 2em;
 `

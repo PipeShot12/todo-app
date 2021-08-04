@@ -1,44 +1,20 @@
 /* eslint-disable no-useless-escape */
-import { Button, withStyles, InputAdornment, IconButton } from '@material-ui/core'
+import { InputAdornment, IconButton } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
-import InputText from '../../components/Inputs/InputText'
+import CustomInputText from '../../components/CustomInputText'
 import styled from 'styled-components'
 import userServices from '../../services/userServices'
-import Modal from '../../components/Modal/Modal'
-const mediaQuery = {
-  desktop: '800px'
-}
+import Modal from '../../components/Modal/'
+import mediaQuery from '../../components/mediaQuery'
+import CustomButton from '../../components/CustomButton'
+import Spinner from "../../components/Spinner"
+import { Title, ContainerAnchor, AnchorStyle, Container } from '../../commonStyles'
 
-const CustomButton = withStyles({
-  root: {
-    width: '100%',
-    height: '50px',
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 18,
-    fontWeight: 'initial',
-    color: 'white',
-    padding: '6px 12px',
-    lineHeight: 1.5,
-    backgroundColor: 'var(--primary)',
-    '&:hover': {
-      backgroundColor: '#F35BB8',
-      boxShadow: 'none'
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#F35BB8',
-      borderColor: '#005cbf'
-    },
-    '&:disabled': {
-      backgroundColor: 'var(--info)'
-    }
-  }
-})(Button)
 const REXEMAIL = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/
+
 export default function Register () {
   const [disableButton, setDisableButton] = useState(false)
   const [isSuccessRegister, setIsSuccessRegister] = useState(false)
@@ -50,9 +26,7 @@ export default function Register () {
   const { register, handleSubmit, formState: { errors, dirtyFields }, watch } = useForm()
   const history = useHistory()
 
-  const showSpinner = () => {
-    return loading ? <i className='fas fa-circle-notch fa-spin' /> : 'Sign Up'
-  }
+
   const onSubmit = async data => {
     if (data) {
       setDisableButton(true)
@@ -91,13 +65,19 @@ export default function Register () {
   return (
     <ContainerStyle>
       {showModal &&
-        <Modal onClose={() => setShowModal(false)}>
-          <IconModal className={icon} size='4em' color={isSuccessRegister ? '#58A600' : 'red'} />
-          <TitleModal size='2.5em' color={isSuccessRegister ? '#58A600' : 'red'}>{text}</TitleModal>
-        </Modal>}
-      <Title>Register</Title>
+        <Modal 
+          onClose={() => setShowModal(false)} 
+          icon={icon} 
+          iconSize="4em" 
+          iconColor={isSuccessRegister ? '#58A600' : 'red'}
+          
+          titleSize="2.5em"
+          titleColor={isSuccessRegister ? '#58A600' : 'red'}
+          titleText={text}
+          />}
+      <Title textAlign='center' >Register</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <InputText
+        <CustomInputText
           label='Name'
           placeholder='Enter your name'
           id='name'
@@ -106,7 +86,7 @@ export default function Register () {
           error={!!errors?.name}
           helperText={errors?.name?.message}
         />
-        <InputText
+        <CustomInputText
           label='Username'
           placeholder='Enter your username'
           id='username'
@@ -115,7 +95,7 @@ export default function Register () {
           error={!!errors?.username}
           helperText={errors?.username?.message}
         />
-        <InputText
+        <CustomInputText
           label='Email'
           placeholder='Enter your email'
           id='email'
@@ -124,7 +104,7 @@ export default function Register () {
           error={!!errors?.email}
           helperText={errors?.email?.message}
         />
-        <InputText
+        <CustomInputText
           placeholder='Enter your password' label='Password'
           type={showPassword ? 'text' : 'password'}
           variant='outlined'
@@ -145,7 +125,7 @@ export default function Register () {
           error={!!errors?.password}
           helperText={errors?.password?.message}
         />
-        <InputText
+        <CustomInputText
           placeholder='Enter your password confirmation' label='Password Confirmation'
           type={showPasswordConfirmation ? 'text' : 'password'}
           variant='outlined'
@@ -169,24 +149,19 @@ export default function Register () {
           error={!!errors?.confirmation}
           helperText={errors?.confirmation?.message}
         />
-        <CustomButton type='submit' disabled={!completedInputs() || disableButton}>{showSpinner()}</CustomButton>
-        <ContainerToSignIn>
+        <CustomButton type='submit' disabled={!completedInputs() || disableButton}>{<Spinner loading={loading}/>}</CustomButton>
+        <ContainerAnchor>
           <p>Already have an acount! </p>
           <Link to='/sign-in'>
-            <LinkSignIn>Sign In </LinkSignIn>
+            <AnchorStyle>Sign In </AnchorStyle>
           </Link>
-        </ContainerToSignIn>
+        </ContainerAnchor>
       </form>
 
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled.div`
-color: black;
-background-color: var(--secondary);
-height: 95vh;
-width: 95vw;
-border-radius: 5px;
+const ContainerStyle = styled(Container)`
 padding: 0 20px;
 overflow: hidden;
 overflow-y: auto;
@@ -194,42 +169,4 @@ overflow-y: auto;
   height: 80vh;
   width: 420px;
 }
-::-webkit-scrollbar{
-    width: 8px;
-}
-::-webkit-scrollbar-track{
-    background: var(--info)
-}
-::-webkit-scrollbar-thumb{
-    background: #f02b41;
-    
-}
-::-webkit-scrollbar-thumb:hover{
-    background: #F35BB8
-}
-`
-const Title = styled.p`
-color:var(--primary);
-font-size: 2.5em;
-font-weight: 300;
-text-align: center;
-`
-const ContainerToSignIn = styled.div`
-display: flex;
-justify-content: space-evenly;
-margin-bottom: 52px;
-color:var(--text);
-`
-const LinkSignIn = styled.p`
-text-decoration:underline; 
-cursor:pointer; 
-color:var(--primary);
-`
-const IconModal = styled.i`
-color: ${props => props.color};
-font-size: ${props => props.size};
-`
-const TitleModal = styled(Title)`
-color: ${props => props.color};
-font-size: ${props => props.size};
 `

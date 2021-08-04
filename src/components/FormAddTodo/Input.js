@@ -1,7 +1,6 @@
-
-import styled from 'styled-components'
 import { useState } from 'react'
-import CustomButton from '../CustomButton/CustomButton'
+import PlusButton from './PlusButton'
+import styled from 'styled-components'
 
 export default function AddInput ({ addTodo }) {
   const [todo, setTodo] = useState('')
@@ -18,7 +17,7 @@ export default function AddInput ({ addTodo }) {
   return (
     <ConstainerInput onSubmit={handleSubmit}>
       <InputText type='text' placeholder='Enter a todo' onChange={hadleChange} value={todo} />
-      <CustomButton classIcon='fas fa-plus' task={todo} />
+      <PlusButton classIcon='fas fa-plus' task={todo} />
     </ConstainerInput>
   )
 }

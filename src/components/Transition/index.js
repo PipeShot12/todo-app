@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-const styledTransition = styled.div`
+const SlideTransition = styled.div`
   .item-enter {
     opacity: 0;
     transform: translateX(200%);
@@ -20,4 +20,4 @@ const styledTransition = styled.div`
   }
 `
 
-export default styledTransition
+export default SlideTransition

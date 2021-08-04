@@ -4,9 +4,10 @@ import { useUser } from '../context/userContex'
 import Login from '../pages/LoginPage/index'
 import NotFound from '../pages/NotFoundPage'
 import Register from '../pages/RegisterPage'
-import Todo from '../pages/TodoApp/'
+import Todo from '../pages/TodoApp'
 
 export default function TodoApp () {
+  // Pseudo Rexdux
   const { localStorageToken, saveTemporalToken } = useUser()
   const { token } = localStorageToken || saveTemporalToken
   return (

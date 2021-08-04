@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import TodoItem from '../TodoItem/TodoItem'
-import TodoItemComplete from '../TodoItemCompleted/TodoItemCompleted'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import styledTransition from '../Transition/Slide'
+import { useState } from 'react'
+import SlideTransition from '../Transition'
+import styled from 'styled-components'
+import TodoItem from '../TodoItem'
 export default function TodoList ({ list, deleteTodo, deleteAllCompleted, changeToCompleted, changeToUncompleted }) {
   const [showCompletedTodos, setShowCompletedTodos] = useState(false)
 
@@ -24,25 +23,25 @@ export default function TodoList ({ list, deleteTodo, deleteAllCompleted, change
     <>
       <TitlePendingTodos>{pnedingTodos(list)}</TitlePendingTodos>
       <ContainerTodoList>
-        <TransitionGroup component={styledTransition}>
-          {list.map((item, index) => !item.complete
-            ? (
+        <TransitionGroup component={SlideTransition}>
+          {list.map((item) => !item.complete
+            && (
               <CSSTransition key={item.id} timeout={500} classNames='item'>
-                <TodoItem key={item.id} todo={item} deleteTodo={deleteTodo} changeToCompleted={changeToCompleted} />
+                <TodoItem key={item.id} todo={item} deleteTodo={deleteTodo} changeCompleted={changeToCompleted} isCompleted={false}/>
               </CSSTransition>)
-            : null)}
+            )}
         </TransitionGroup>
       </ContainerTodoList>
       {showCompletedTodos &&
         <ContainerTodoList>
           <TitlePendingTodos>Completed Tasks {completedTodos(list)} %</TitlePendingTodos>
-          <TransitionGroup component={styledTransition}>
-            {list.map((item, index) => item.complete
-              ? (
+          <TransitionGroup component={SlideTransition}>
+            {list.map((item) => item.complete
+              && (
                 <CSSTransition key={item.id} timeout={500} classNames='item'>
-                  <TodoItemComplete key={item.id} todo={item} deleteTodo={deleteTodo} changeToUncompleted={changeToUncompleted} />
+                  <TodoItem key={item.id} todo={item} deleteTodo={deleteTodo} changeCompleted={changeToUncompleted} isCompleted={true}/>
                 </CSSTransition>)
-              : null)}
+              )}
           </TransitionGroup>
         </ContainerTodoList>}
       <CompletedControls>

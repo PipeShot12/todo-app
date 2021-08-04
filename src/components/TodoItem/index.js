@@ -1,19 +1,19 @@
 import styled from 'styled-components'
-import CustomCheckBox from '../CustomCheckBox/CustomCheckBox'
+import CustomCheckBox from '../CustomCheckBox'
 import { useState } from 'react'
 
-export default function TodoItemCompleted ({ todo, deleteTodo, changeToUncompleted }) {
-  const [checked, setChecked] = useState(true)
+export default function TodoItemCompleted ({ todo, deleteTodo, changeCompleted, isCompleted }) {
+  const [checked, setChecked] = useState(isCompleted)
 
   const handleCheckboxChange = (e, todo) => {
     setChecked(e.target.checked)
-    changeToUncompleted(todo)
+    changeCompleted(todo)
   }
   const hadleClick = (e, todo) => {
     deleteTodo(todo)
   }
   return (
-    <ContainerItem>
+    <ContainerItem isCompleted={isCompleted}>
       <label>
         <CustomCheckBox
           checked={checked}
@@ -21,7 +21,7 @@ export default function TodoItemCompleted ({ todo, deleteTodo, changeToUncomplet
           onChange={(e) => handleCheckboxChange(e, todo)}
         />
       </label>
-      <Title>{todo?.title}</Title>
+      <Title isCompleted={isCompleted}>{todo?.title}</Title>
       <DeleteBox className='deleteBox' onClick={e => hadleClick(e, todo)}>
         <TrashIcon className='fas fa-trash trashIcon' />
       </DeleteBox>
@@ -30,7 +30,7 @@ export default function TodoItemCompleted ({ todo, deleteTodo, changeToUncomplet
 }
 
 const ContainerItem = styled.div`
-background-color: white;
+background-color: ${ props => props.isCompleted ? 'white' : '#E0E8F5'};
 height: 50px;
 padding:5px;
 display: flex;
@@ -53,7 +53,7 @@ margin: 10px 0;
 `
 const Title = styled.p`
 color: var(--text);
-text-decoration: line-through;
+text-decoration: ${props => props.isCompleted && 'line-through'};
 `
 
 const TrashIcon = styled.i`

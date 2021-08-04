@@ -3,23 +3,40 @@ import styled from 'styled-components'
 import ReactDOM from 'react-dom'
 import useClickOutside from '../../hooks/useClickOutside'
 import closeButton from '../../assets/closeButton.svg'
-const mediaQuery = {
-  desktop: '800px'
-}
-function Modal ({ children, onClose }) {
+import mediaQuery from '../mediaQuery'
+
+function Modal ({ children, onClose, icon, iconSize, iconColor, titleSize, titleColor, titleText }) {
   const modalRef = useClickOutside(() => onClose())
   return (
     <ContainerModal>
       <ModalBox ref={modalRef}>
         <ButtonCloseModal onClick={() => onClose()} />
+        <IconModal className={icon} size={iconSize} color={iconColor}/>
+        <TitleModal size={titleSize} color={titleColor}>{titleText}</TitleModal>
         {children}
       </ModalBox>
     </ContainerModal>
   )
 }
-export default function ModalPortal ({ children, onClose }) {
+export default function ModalPortal ({ 
+  children, 
+  onClose, 
+  icon, 
+  iconSize, 
+  iconColor, 
+  titleSize, 
+  titleColor,
+  titleText }) {
   return ReactDOM.createPortal(
-    <Modal onClose={onClose}>
+    <Modal 
+    onClose={onClose} 
+    icon={icon} 
+    iconSize={iconSize} 
+    iconColor={iconColor} 
+    titleSize={titleSize} 
+    titleColor={titleColor}
+    titleText={titleText}
+    >
       {children}
     </Modal>,
     document.getElementById('modal')
@@ -41,8 +58,8 @@ background: rgba(83,83,70,0.5);
 const ModalBox = styled.div`
 color: #58A600;
 background-color: var(--secondary);
-height: 95vh;
-width: 95vw;
+height: 80vh;
+width: 80vw;
 border-radius: 5px;
 padding: 0 20px;
 display: flex;
@@ -68,4 +85,14 @@ width: 25px;
   font-size: 2em;
   cursor: pointer;
 }
+`
+const IconModal = styled.i`
+color: ${props => props.color};
+font-size: ${props => props.size};
+`
+const TitleModal = styled.p`
+color: ${props => props.color};
+font-size: ${props => props.size};
+font-weight: 300;
+text-align: center;
 `
