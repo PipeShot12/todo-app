@@ -14,7 +14,7 @@ export default function TodoApp () {
     <Switch>
       <Route path='/sign-in' render={() => token ? <Redirect to='/app' /> : <Login />} />
       <Route path='/sign-up' render={() => token ? <Redirect to='/app' /> : <Register />} />
-      <Route path='/app' render={() => token ? <Todo /> : <Redirect to='/' />} />
+      <Route path='/app' render={() => !token ? <Todo /> : <Redirect to='/' />} />
       <Route component={NotFound} />
     </Switch>
   )

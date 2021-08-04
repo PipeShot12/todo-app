@@ -30,6 +30,7 @@ export default function TodoItemCompleted ({ todo, deleteTodo, changeCompleted, 
 }
 
 const ContainerItem = styled.div`
+color: white;
 background-color: ${ props => props.isCompleted ? 'white' : '#E0E8F5'};
 height: 50px;
 padding:5px;

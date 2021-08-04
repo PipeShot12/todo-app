@@ -12,7 +12,7 @@ import { Title, Container } from '../../commonStyles'
 
 export default function Todo () {
   const { localStorageToken, saveTemporalToken, setSaveTemporalToken, setLocalStorageToken } = useUser()
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([{id:1,title:"tarea",complete:false}])
   const [showModal, setShowModal] = useState(false)
   const history = useHistory()
   const { token, username } = localStorageToken || saveTemporalToken
