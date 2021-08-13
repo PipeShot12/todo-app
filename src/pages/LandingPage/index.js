@@ -5,10 +5,12 @@ import todoLandingImage from '../../assets/todoLandingImage.svg'
 import mediaQuery from '../../components/mediaQuery'
 import CustomButton from '../../components/CustomButton'
 import { Title, Container } from '../../commonStyles'
+import { animated } from 'react-spring'
+import { EnterAnimation } from '../../animation'
 
 export default function LandingPage () {
   return (
-    <ContainerStyle>
+    <ContainerStyle style={EnterAnimation()}>
       <ContainerPhoto>
         <Title size='3.5em' paddingTop='40px'>Todo List App</Title>
         <img src={todoLandingImage} atl='todo list app' />
@@ -32,7 +34,7 @@ export default function LandingPage () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled(Container)`
+const ContainerStyle = animated(styled(Container)`
 padding: 50px 0px;
 overflow: hidden;
 overflow-y: auto;
@@ -46,7 +48,7 @@ flex-direction: column;
   justify-content: center;
 
 }
-`
+`)
 const ContainerPhoto = styled.div`
 display: flex;
 flex-direction: column;

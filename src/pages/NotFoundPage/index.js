@@ -1,14 +1,17 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import pageNotFound from '../../assets/pageNotFound.svg'
-import mediaQuery from '../../components/mediaQuery'
-import CustomButton from '../../components/CustomButton'
+import { animated } from 'react-spring'
 import { Container } from '../../commonStyles/'
+import { EnterAnimation } from '../../animation'
+import { Link } from 'react-router-dom'
+import CustomButton from '../../components/CustomButton'
+import mediaQuery from '../../components/mediaQuery'
+import pageNotFound from '../../assets/pageNotFound.svg'
+import styled from 'styled-components'
+
 
 export default function NotFound () {
   return (
-    <ContainerStyle>
+    <ContainerStyle style={EnterAnimation()}>
       <ContainerPhoto>
         <img src={pageNotFound} atl='page not found' />
       </ContainerPhoto>
@@ -23,7 +26,7 @@ export default function NotFound () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled(Container)`
+const ContainerStyle = animated(styled(Container)`
 padding: 50px 0px;
 overflow: hidden;
 overflow-y: auto;
@@ -36,7 +39,7 @@ align-items: center;
   width: 80vw;
 
 }
-`
+`)
 const ContainerPhoto = styled.div`
 display: flex;
 flex-direction: column;

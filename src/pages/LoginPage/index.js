@@ -13,6 +13,8 @@ import mediaQuery from "../../components/mediaQuery/"
 import CustomButton from '../../components/CustomButton'
 import Spinner from "../../components/Spinner"
 import { Title, ContainerAnchor, AnchorStyle, Container } from '../../commonStyles'
+import { animated } from 'react-spring'
+import { EnterAnimation } from '../../animation'
 
 export default function Login () {
   const [checked, setChecked] = useState(false)
@@ -55,7 +57,7 @@ export default function Login () {
   }
 
   return (
-    <ContainerStyle>
+    <ContainerStyle style={EnterAnimation()}>
       {showModal &&
         <Modal 
         onClose={() => setShowModal(false)}
@@ -128,7 +130,7 @@ export default function Login () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled(Container)`
+const ContainerStyle = animated(styled(Container)`
 padding: 0 20px;
 display: flex;
 flex-direction: column;
@@ -146,7 +148,7 @@ justify-content: center;
   height: 66vh;
   width: 420px;
 }
-`
+`)
 
 const ContainerCheckbox = styled.div`
 display: flex;

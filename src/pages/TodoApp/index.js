@@ -1,14 +1,17 @@
+
+import { animated } from 'react-spring'
+import { EnterAnimation } from '../../animation'
+import { Title, Container } from '../../commonStyles'
 import { useHistory } from 'react-router'
 import { useState, useEffect } from 'react'
 import { useUser } from '../../context/userContex'
 import AddInput from '../../components/FormAddTodo/Input'
+import CustomButton from '../../components/CustomButton'
+import mediaQuery from '../../components/mediaQuery'
 import Modal from '../../components/Modal'
 import styled from 'styled-components'
 import TodoList from '../../components/TodoList'
 import todoServices from '../../services/todoServices'
-import mediaQuery from '../../components/mediaQuery'
-import CustomButton from '../../components/CustomButton'
-import { Title, Container } from '../../commonStyles'
 
 export default function Todo () {
   const { localStorageToken, saveTemporalToken, setSaveTemporalToken, setLocalStorageToken } = useUser()
@@ -72,7 +75,7 @@ export default function Todo () {
     setShowModal(true)
   }
   return (
-    <ContainerStyle>
+    <ContainerStyle style={EnterAnimation()}>
       {showModal &&
         <Modal 
         onClose={() => setShowModal(false)} 
@@ -105,7 +108,7 @@ export default function Todo () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled(Container)`
+const ContainerStyle = animated(styled(Container)`
 padding: 0 20px;
 overflow: hidden;
 overflow-y: auto;
@@ -121,4 +124,4 @@ overflow-y: auto;
   height: 66vh;
   width: 420px;
 }
-`
+`)

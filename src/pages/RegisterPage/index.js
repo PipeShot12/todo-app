@@ -1,17 +1,20 @@
 /* eslint-disable no-useless-escape */
+import { animated } from 'react-spring'
+import { EnterAnimation } from '../../animation'
 import { InputAdornment, IconButton } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
+import { Title, ContainerAnchor, AnchorStyle, Container } from '../../commonStyles'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
+import CustomButton from '../../components/CustomButton'
 import CustomInputText from '../../components/CustomInputText'
+import mediaQuery from '../../components/mediaQuery'
+import Modal from '../../components/Modal/'
+import Spinner from "../../components/Spinner"
 import styled from 'styled-components'
 import userServices from '../../services/userServices'
-import Modal from '../../components/Modal/'
-import mediaQuery from '../../components/mediaQuery'
-import CustomButton from '../../components/CustomButton'
-import Spinner from "../../components/Spinner"
-import { Title, ContainerAnchor, AnchorStyle, Container } from '../../commonStyles'
+
 
 const REXEMAIL = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/
 
@@ -63,7 +66,7 @@ export default function Register () {
     ? ['fas fa-check-circle', registerMsg]
     : ['fas fa-exclamation-circle', registerMsg]
   return (
-    <ContainerStyle>
+    <ContainerStyle style={EnterAnimation()}>
       {showModal &&
         <Modal 
           onClose={() => setShowModal(false)} 
@@ -161,7 +164,7 @@ export default function Register () {
     </ContainerStyle>
   )
 }
-const ContainerStyle = styled(Container)`
+const ContainerStyle = animated(styled(Container)`
 padding: 0 20px;
 overflow: hidden;
 overflow-y: auto;
@@ -169,4 +172,4 @@ overflow-y: auto;
   height: 80vh;
   width: 420px;
 }
-`
+`)
