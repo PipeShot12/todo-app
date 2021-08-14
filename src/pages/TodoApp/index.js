@@ -1,4 +1,3 @@
-
 import { animated } from 'react-spring'
 import { EnterAnimation } from '../../animation'
 import { Title, Container } from '../../commonStyles'

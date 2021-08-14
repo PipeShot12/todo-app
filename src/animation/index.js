@@ -1,4 +1,4 @@
-import { useSpring ,config} from 'react-spring'
+import { useSpring ,useTransition, config} from 'react-spring'
 
 export const EnterAnimation = () =>{
     return useSpring({
@@ -7,4 +7,13 @@ export const EnterAnimation = () =>{
         config:config.stiff,
         delay: 200, 
     })
+}
+
+export const SlideAnimation = (items) =>{
+    return useTransition(items, {
+        from: {transform: 'translate(400%)', opacity : 0},
+        enter: { transform: 'translate(0px)', opacity : 1 },
+        leave: { transform: 'translate(400%)', opacity : 0 },
+        config: config.default,
+      })
 }

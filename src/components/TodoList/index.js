@@ -1,10 +1,8 @@
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { useState } from 'react'
-import SlideTransition from '../Transition'
 import styled from 'styled-components'
 import TodoItem from '../TodoItem'
-import { useTransition, config, animated } from 'react-spring'
-
+import {  animated } from 'react-spring'
+import { SlideAnimation } from '../../animation'
 
 export default function TodoList ({ list, deleteTodo, deleteAllCompleted, changeToCompleted, changeToUncompleted }) {
   const [showCompletedTodos, setShowCompletedTodos] = useState(false)
@@ -21,12 +19,7 @@ export default function TodoList ({ list, deleteTodo, deleteAllCompleted, change
   const completedTodos = (item) => {
     return item.length > 0 ? Math.floor(((item.filter(item => item.complete).length) / item.length) * 100) : 0
   }
-  const transitions = useTransition(list, {
-    enter: { transform: 'translate(0px)', opacity : 1 },
-    leave: { transform: 'translate(400%)', opacity : 0 },
-    config: config.default,
-  })
-
+  const transitions = SlideAnimation(list)
   return (
     <>
       <TitlePendingTodos>{pnedingTodos(list)}</TitlePendingTodos>
