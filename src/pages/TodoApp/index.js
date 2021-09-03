@@ -22,6 +22,11 @@ export default function Todo () {
     todoServices.getAllTodos(token)
       .then(res => res.json())
       .then(res => setTodos(res))
+      .catch(err => {
+        setLocalStorageToken('')
+        setTimeout(() => window.localStorage.removeItem('loginToken'), 200)
+        history.replace('/')
+      })
   }, [])
 
   const addTodo = (newTodo) => {
